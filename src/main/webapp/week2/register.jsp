@@ -17,14 +17,14 @@
 </head>
 
 <body>
-<form action="#" class="form-horizontal" style="margin-top: 80px" method="post" target="iframe">
+<form action="${pageContext.request.contextPath}/jdbc" class="form-horizontal" style="margin-top: 80px" method="post" target="iframe">
     <div class="form-group">
         <h2 class="col-sm-offset-5 col-sm-7">New User Registration!</h2>
     </div>
     <div class="form-group">
         <label for="username" class="col-sm-5 control-label"></label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="username" placeholder="Username">
+            <input type="text" class="form-control" id="username" placeholder="Username" name="username">
         </div>
         <span id="usernameError" style="color: red;display: none">username is  null！</span>
     </div>
@@ -49,17 +49,17 @@
         <div class="col-sm-7">
             <label class="radio-inline" style="font-weight: bold">Gender</label>
             <label class="radio-inline">
-               <input type="radio" name="inlineRadioOptions" id="man" > Male
+               <input type="radio" name="sex" id="man" value="Male" checked="checked"> Male
             </label>
             <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="woman"> Female
+                <input type="radio" name="sex" id="woman" value="Female"> Female
             </label>
         </div>
     </div>
     <div class="form-group">
         <label for="inputPassword3" class="col-sm-5 control-label"></label>
         <div class="col-sm-3">
-            <input type="date" class="form-control" id="date" >
+            <input type="date" class="form-control" id="date" name="date">
         </div>
     </div>
     <div class="form-group">
