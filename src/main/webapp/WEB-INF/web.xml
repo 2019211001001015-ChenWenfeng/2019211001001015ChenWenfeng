@@ -18,14 +18,92 @@
     <url-pattern>/hello</url-pattern>
   </servlet-mapping>
 
+<!--  <servlet>-->
+<!--    <servlet-name>RegisterServlet</servlet-name>-->
+<!--    <servlet-class>com.chenwenfeng.week3.RegisterServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>RegisterServlet</servlet-name>-->
+<!--    <url-pattern>/jdbc</url-pattern>-->
+<!--  </servlet-mapping>-->
+  
   <servlet>
-    <servlet-name>RegisterServlet</servlet-name>
-    <servlet-class>com.chenwenfeng.week3.RegisterServlet</servlet-class>
+    <servlet-name>ConfigDemoServlet</servlet-name>
+    <servlet-class>com.chenwenfeng.week4.ConfigDemoServlet</servlet-class>
+    <init-param>
+      <param-name>name</param-name>
+      <param-value>Chen Wenfeng</param-value>
+    </init-param>
+    <init-param>
+      <param-name>studentid</param-name>
+      <param-value>2019211001001015</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/jdbc</url-pattern>
+    <servlet-name>ConfigDemoServlet</servlet-name>
+    <url-pattern>/config</url-pattern>
   </servlet-mapping>
+
+
+
+ <servlet>
+   <servlet-name>RegisterServlet</servlet-name>
+   <servlet-class>com.chenwenfeng.week3.RegisterServlet</servlet-class>
+   <init-param>
+     <param-name>driver</param-name>
+     <param-value>com.mysql.jdbc.Driver</param-value>
+   </init-param>
+   <!-- 配置Servlet的初始化参数：url -->
+   <init-param>
+     <param-name>url</param-name>
+     <param-value>jdbc:mysql://localhost:3306/userdb</param-value>
+   </init-param>
+   <!-- 配置Servlet的初始化参数：user -->
+   <init-param>
+     <param-name>username</param-name>
+     <param-value>root</param-value>
+   </init-param>
+   <!-- 配置Servlet的初始化参数：pass -->
+   <init-param>
+     <param-name>password</param-name>
+     <param-value>131556</param-value>
+   </init-param>
+ </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+
+
+
+  <servlet>
+    <servlet-name>SelectServlet</servlet-name>
+    <servlet-class>com.chenwenfeng.week3.SelectServlet</servlet-class>
+    <init-param>
+      <param-name>driver</param-name>
+      <param-value>com.mysql.jdbc.Driver</param-value>
+    </init-param>
+    <!-- 配置Servlet的初始化参数：url -->
+    <init-param>
+      <param-name>url</param-name>
+      <param-value>jdbc:mysql://localhost:3306/userdb</param-value>
+    </init-param>
+    <!-- 配置Servlet的初始化参数：user -->
+    <init-param>
+      <param-name>username</param-name>
+      <param-value>root</param-value>
+    </init-param>
+    <!-- 配置Servlet的初始化参数：pass -->
+    <init-param>
+      <param-name>password</param-name>
+      <param-value>131556</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectServlet</servlet-name>
+    <url-pattern>/selectAll</url-pattern>
+  </servlet-mapping>
+
 
 
 </web-app>
