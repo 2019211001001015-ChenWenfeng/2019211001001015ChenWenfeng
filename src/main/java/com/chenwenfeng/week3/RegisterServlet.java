@@ -2,8 +2,12 @@ package com.chenwenfeng.week3;
 
 
 
+
+
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,20 +15,30 @@ import java.io.IOException;
 import java.sql.*;
 
 
-
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
-    private String driver;
-    private String username;
-    private String password;
-    private String url;
+
+    Connection conn = null;
     @Override
     public void init(ServletConfig config) throws ServletException {
-        driver = config.getInitParameter("driver");
-        url = config.getInitParameter("url");
-        username = config.getInitParameter("username");
-        password = config.getInitParameter("password");
+        ServletContext context = config.getServletContext();
+        String driver = context.getInitParameter("driver");
+        String url = context.getInitParameter("url");
+        String username = context.getInitParameter("username");
+        String password = context.getInitParameter("password");
 
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 建立数据库连接，获得连接对象conn
+        try {
+            conn = DriverManager.getConnection(url, username,password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,9 +53,7 @@ public class RegisterServlet extends HttpServlet {
 
         try {
 
-            Class.forName(driver);
-            // 建立数据库连接，获得连接对象conn
-            Connection conn = DriverManager.getConnection(url, username, password);
+
             String sql = "insert into usertable values (?,?,?,?,?)"; // 生成一条sql语句
             // 创建一个Statment对象
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -60,7 +72,7 @@ public class RegisterServlet extends HttpServlet {
             // 关闭数据库连接对象
             conn.close();
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
         }
@@ -80,4 +92,6 @@ public class RegisterServlet extends HttpServlet {
 
         doPost(request, response);
     }
+
+   
 }

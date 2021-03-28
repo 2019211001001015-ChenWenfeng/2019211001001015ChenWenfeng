@@ -1,6 +1,10 @@
 package com.chenwenfeng.week3;
 
+
+
+
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +14,33 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-
+@WebServlet("/selectAll")
 public class SelectServlet extends HttpServlet {
-    private String driver;
-    private String username;
-    private String password;
-    private String url;
+    Connection conn = null;
     @Override
     public void init(ServletConfig config) throws ServletException {
-        driver = config.getInitParameter("driver");
-        url = config.getInitParameter("url");
-        username = config.getInitParameter("username");
-        password = config.getInitParameter("password");
+        ServletContext context = config.getServletContext();
+        String driver = context.getInitParameter("driver");
+        String url = context.getInitParameter("url");
+        String username = context.getInitParameter("username");
+        String password = context.getInitParameter("password");
+
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 建立数据库连接，获得连接对象conn
+        try {
+            conn = DriverManager.getConnection(url, username,password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -30,9 +48,7 @@ public class SelectServlet extends HttpServlet {
         try {
 
 
-            Class.forName(driver);
-            // 建立数据库连接，获得连接对象conn
-            Connection conn = DriverManager.getConnection(url, username, password);
+
             String sql = "select * from usertable"; // 生成一条sql语句
             // 创建一个Statment对象
 
@@ -81,7 +97,7 @@ public class SelectServlet extends HttpServlet {
             // 关闭数据库连接对象
             conn.close();
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
         }
