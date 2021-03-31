@@ -69,8 +69,7 @@ public class RegisterServlet extends HttpServlet {
 
             // 执行sql语句
             ps.executeUpdate();
-            // 关闭数据库连接对象
-            conn.close();
+
 
         } catch (SQLException e) {
 
