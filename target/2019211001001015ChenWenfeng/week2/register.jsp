@@ -17,6 +17,9 @@
 </head>
 
 <body>
+<%@include file="../header.jsp"%>
+This is My JSP page.<br/>
+
 <form action="${pageContext.request.contextPath}/register" class="form-horizontal" style="margin-top: 80px" method="post" target="iframe">
     <div class="form-group">
         <h2 class="col-sm-offset-5 col-sm-7">New User Registration!</h2>
@@ -128,6 +131,7 @@
 
 
 </script>
+<%@include file="../footer.jsp"%>
 </body>
 
 </html>
