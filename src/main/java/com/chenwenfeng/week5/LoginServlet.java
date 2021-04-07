@@ -52,12 +52,24 @@ public class LoginServlet extends HttpServlet {
 
             PrintWriter pw = response.getWriter();
             if (rs.next()) {
-                pw.write("<h1>Login Success!!!</h1>");
-                pw.write("<h1>Welcome,"+username+"</h1>");
+//                pw.write("<h1>Login Success!!!</h1>");
+//                pw.write("<h1>Welcome,"+username+"</h1>");
+
+                request.setAttribute("username",rs.getString("username"));
+                request.setAttribute("password",rs.getString("password"));
+                request.setAttribute("email",rs.getString("email"));
+                request.setAttribute("gender",rs.getString("gender"));
+                request.setAttribute("date",rs.getString("birthDate"));
+
+                request.getRequestDispatcher("/userInfo.jsp").forward(request, response);
+
             }
 
             else {
-                pw.write("<h1>Login Error！</h1>");
+//                pw.write("<h1>Login Error！</h1>");
+
+                request.setAttribute("message","Username or Password Error !!!");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
 
 

@@ -82,7 +82,7 @@ public class RegisterServlet extends HttpServlet {
 
 
 
-        response.sendRedirect(request.getContextPath()+"/selectAll");
+        response.sendRedirect("/2019211001001015ChenWenfeng/login.jsp");
 
     }
 
