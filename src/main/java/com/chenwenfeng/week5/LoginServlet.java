@@ -15,24 +15,25 @@ import java.sql.*;
 public class LoginServlet extends HttpServlet {
     Connection conn;
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        ServletContext context = config.getServletContext();
-        String driver = context.getInitParameter("driver");
-        String url = context.getInitParameter("url");
-        String username = context.getInitParameter("username");
-        String password = context.getInitParameter("password");
-
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        // 建立数据库连接，获得连接对象conn
-        try {
-            conn = DriverManager.getConnection(url, username,password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void init(){
+//        ServletContext context = config.getServletContext();
+//        String driver = context.getInitParameter("driver");
+//        String url = context.getInitParameter("url");
+//        String username = context.getInitParameter("username");
+//        String password = context.getInitParameter("password");
+//
+//        try {
+//            Class.forName(driver);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        // 建立数据库连接，获得连接对象conn
+//        try {
+//            conn = DriverManager.getConnection(url, username,password);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+         conn = (Connection) getServletContext().getAttribute("conn");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,7 +62,7 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("gender",rs.getString("gender"));
                 request.setAttribute("date",rs.getString("birthDate"));
 
-                request.getRequestDispatcher("/userInfo.jsp").forward(request, response);
+                request.getRequestDispatcher("userInfo.jsp").forward(request, response);
 
             }
 
@@ -69,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 //                pw.write("<h1>Login Error！</h1>");
 
                 request.setAttribute("message","Username or Password Error !!!");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
 
