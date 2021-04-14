@@ -67,5 +67,10 @@
      <param-value>131556</param-value>
    </context-param>
 
+<!--项目运行，第一个加载该路径-->
+  <welcome-file-list>
+    <welcome-file>home</welcome-file>
+  </welcome-file-list>
+
 
 </web-app>

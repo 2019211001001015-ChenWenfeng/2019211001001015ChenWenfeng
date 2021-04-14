@@ -1,5 +1,8 @@
 package com.chenwenfeng.week5;
 
+import com.chenwenfeng.dao.UserDao;
+import com.chenwenfeng.model.User;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,54 +40,75 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//        try {
+//
+//
+//            String sql = "select * from usertable where username = ? and password = ?"; // 生成一条sql语句
+//            // 创建一个Statment对象
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//            ps.setString(1,username);
+//            ps.setString(2,password);
+//
+//
+//            ResultSet rs = ps.executeQuery();
+//
+//
+//            if (rs.next()) {
+////                pw.write("<h1>Login Success!!!</h1>");
+////                pw.write("<h1>Welcome,"+username+"</h1>");
+//
+//                request.setAttribute("username",rs.getString("username"));
+//                request.setAttribute("password",rs.getString("password"));
+//                request.setAttribute("email",rs.getString("email"));
+//                request.setAttribute("gender",rs.getString("gender"));
+//                request.setAttribute("date",rs.getString("birthDate"));
+//
+//                request.getRequestDispatcher("userInfo.jsp").forward(request, response);
+//
+//            }
+//
+//            else {
+////                pw.write("<h1>Login Error！</h1>");
+//
+//                request.setAttribute("message","Username or Password Error !!!");
+//                request.getRequestDispatcher("login.jsp").forward(request, response);
+//            }
+//
+//
+//
+//        } catch (SQLException e) {
+//
+//            e.printStackTrace();
+//        }
+
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
+
+        UserDao userDao = new UserDao();
         try {
+           User user =  userDao.findByUsernamePassword(conn,username,password);
 
-
-            String sql = "select * from usertable where username = ? and password = ?"; // 生成一条sql语句
-            // 创建一个Statment对象
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,username);
-            ps.setString(2,password);
-
-
-            ResultSet rs = ps.executeQuery();
-
-            PrintWriter pw = response.getWriter();
-            if (rs.next()) {
-//                pw.write("<h1>Login Success!!!</h1>");
-//                pw.write("<h1>Welcome,"+username+"</h1>");
-
-                request.setAttribute("username",rs.getString("username"));
-                request.setAttribute("password",rs.getString("password"));
-                request.setAttribute("email",rs.getString("email"));
-                request.setAttribute("gender",rs.getString("gender"));
-                request.setAttribute("date",rs.getString("birthDate"));
-
-                request.getRequestDispatcher("userInfo.jsp").forward(request, response);
-
-            }
-
-            else {
-//                pw.write("<h1>Login Error！</h1>");
-
-                request.setAttribute("message","Username or Password Error !!!");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-
-
-
+           if(user != null)
+           {
+               request.setAttribute("user",user);
+               request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+           }
+           else{
+               request.setAttribute("message","Username or Password Error !!!");
+               request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
+           }
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
-
 
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doPost(request, response);
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
     }
 }
