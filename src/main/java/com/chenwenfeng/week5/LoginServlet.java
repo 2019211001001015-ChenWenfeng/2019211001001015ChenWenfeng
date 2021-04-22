@@ -7,9 +7,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -94,7 +92,26 @@ public class LoginServlet extends HttpServlet {
 
            if(user != null)
            {
-               request.setAttribute("user",user);
+               String rememberMe = request.getParameter("rememberMe");
+               if (rememberMe != null && rememberMe.equals("1"))
+               {
+                   Cookie usernameCookie = new Cookie("cUsername",user.getUsername());
+                   Cookie passwordCookie = new Cookie("cPassword",user.getPassword());
+                   Cookie rememberCookie = new Cookie("cRememberMe",rememberMe);
+
+
+                   usernameCookie.setMaxAge(5);
+                   passwordCookie.setMaxAge(5);
+                   rememberCookie.setMaxAge(5);
+
+                   response.addCookie(usernameCookie);
+                   response.addCookie(passwordCookie);
+                   response.addCookie(rememberCookie);
+               }
+               HttpSession session = request.getSession();
+               session.setMaxInactiveInterval(10);
+
+               session.setAttribute("user",user);
                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
            }
            else{

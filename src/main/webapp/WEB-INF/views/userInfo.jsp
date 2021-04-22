@@ -14,7 +14,7 @@
 <body>
 <h1>User Info</h1>
 <%
-    User user = (User) request.getAttribute("user");
+    User user = (User) session.getAttribute("user");
 %>
 <table>
     <tr><td>Username:</td><td><%=user.getUsername()%></td></tr>
@@ -23,6 +23,10 @@
     <tr><td>Gender:</td><td><%=user.getGender()%></td></tr>
     <tr><td>Date:</td><td><%=user.getBirthDate()%></td></tr>
 </table>
+<form action="${pageContext.request.contextPath}/update" method="get">
+
+    <input type="submit" value="Update">
+</form>
 
 </body>
 </html>

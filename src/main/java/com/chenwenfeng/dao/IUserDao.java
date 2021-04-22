@@ -10,7 +10,7 @@ import java.util.List;
 public interface IUserDao {
     public boolean saveUser(Connection con, User user) throws SQLException;
     public int deleteUser(Connection con, User user) throws SQLException;
-    public int updateUser(Connection con, User user) throws SQLException;
+    public void updateUser(Connection con, User user) throws SQLException;
 
     public User findById(Connection con, Integer id) throws SQLException;
     public User findByUsernamePassword(Connection con, String username, String password) throws SQLException;

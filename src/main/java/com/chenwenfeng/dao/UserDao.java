@@ -6,13 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class UserDao  implements IUserDao{
 
-
+   private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public boolean saveUser(Connection con, User user) throws SQLException {
@@ -22,7 +23,7 @@ public class UserDao  implements IUserDao{
         st.setString(2,user.getPassword());
         st.setString(3,user.getEmail());
         st.setString(4,user.getGender());
-        st.setDate(5, (java.sql.Date) user.getBirthDate());
+        st.setString(5,sdf.format(user.getBirthDate()));
 
         int i = st.executeUpdate();
         if(i >0 )
@@ -48,7 +49,7 @@ public class UserDao  implements IUserDao{
     }
 
     @Override
-    public int updateUser(Connection con, User user) throws SQLException {
+    public void updateUser(Connection con, User user) throws SQLException {
 
         String sql = "update usertable set username = ?,password = ?,email = ?,gender = ?,birthDate = ? where id = ?";
         PreparedStatement st = con.prepareStatement(sql);
@@ -56,11 +57,11 @@ public class UserDao  implements IUserDao{
         st.setString(2,user.getPassword());
         st.setString(3,user.getEmail());
         st.setString(4,user.getGender());
-        st.setDate(5, (java.sql.Date) user.getBirthDate());
+        st.setString(5, sdf.format(user.getBirthDate()));
         st.setInt(6,user.getId());
 
-        int i = st.executeUpdate();
-        return i;
+        st.executeUpdate();
+
     }
 
     @Override

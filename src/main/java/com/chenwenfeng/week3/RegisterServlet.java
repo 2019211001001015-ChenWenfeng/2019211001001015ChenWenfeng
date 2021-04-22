@@ -54,7 +54,7 @@ public class RegisterServlet extends HttpServlet {
         try {
 
 
-            String sql = "insert into usertable values (?,?,?,?,?)"; // 生成一条sql语句
+            String sql = "insert into usertable(username, password, email, gender, birthDate) values (?,?,?,?,?)"; // 生成一条sql语句
             // 创建一个Statment对象
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,user);
