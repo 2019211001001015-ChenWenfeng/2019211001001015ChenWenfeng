@@ -48,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
         String pass= request.getParameter("password");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
-        String date = request.getParameter("date");
+        String date = request.getParameter("birthdate");
 
 
         try {
@@ -82,14 +82,14 @@ public class RegisterServlet extends HttpServlet {
 
 
 
-        response.sendRedirect("/2019211001001015ChenWenfeng/login.jsp");
+        response.sendRedirect("login");
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        doPost(request, response);
+        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
     }
 
    

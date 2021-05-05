@@ -23,7 +23,7 @@
     <tr><td>Gender:</td><td><%=user.getGender()%></td></tr>
     <tr><td>Date:</td><td><%=user.getBirthDate()%></td></tr>
 </table>
-<form action="${pageContext.request.contextPath}/update" method="get">
+<form action="update" method="get">
 
     <input type="submit" value="Update">
 </form>
