@@ -10,7 +10,7 @@ import java.io.IOException;
 public class FrontEndAuthenticationFilter implements Filter {
         private HttpServletRequest httpRequest;
         private static  final  String[] loginRequiredURLs = {
-                "updateUser","logout","myCart"
+                "/updateUser","/logout","/myCart"
         };
 
     @Override
@@ -29,7 +29,7 @@ public class FrontEndAuthenticationFilter implements Filter {
             return;
         }
         HttpSession session = httpRequest.getSession(false);
-        boolean isLoggedIn = (session!=null && session.getAttribute("userList") != null);
+        boolean isLoggedIn = (session!=null && session.getAttribute("user") != null);
         String loginURI = httpRequest.getContextPath()+"/login";
         boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
         boolean isLoginPage = httpRequest.getRequestURI().endsWith("login");
@@ -38,7 +38,7 @@ public class FrontEndAuthenticationFilter implements Filter {
         {
             httpRequest.getRequestDispatcher("/").forward(servletRequest, servletResponse);
 
-        }else  if(!isLoggedIn || isLoginRequired())
+        }else  if(!isLoggedIn && isLoginRequired())
         {
             String loginPage = "/login";
             RequestDispatcher dispatcher = httpRequest.getRequestDispatcher(loginPage);
