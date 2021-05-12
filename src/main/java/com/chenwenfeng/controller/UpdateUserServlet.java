@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,6 +28,7 @@ public class UpdateUserServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         User user = new User();
 
@@ -41,6 +43,10 @@ public class UpdateUserServlet extends HttpServlet {
 
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+        if(user!=null)
+        {
+            session.setAttribute("user",user);
         }
 
         user.setId(id);
