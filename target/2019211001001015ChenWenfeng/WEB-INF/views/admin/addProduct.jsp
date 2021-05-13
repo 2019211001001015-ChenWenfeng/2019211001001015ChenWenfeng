@@ -31,8 +31,15 @@
 										<option >-- Category --</option>
 											<!-- loop_start -->
 											
-										<option value=""></option>
-										
+										<option value="43">FASHION</option>
+										<option value="44">HOUSEHOLD</option>
+										<option value="45">INTERIORS</option>
+										<option value="46">CLOTHING</option>
+										<option value="47">BAGS</option>
+										<option value="48">SHOES</option>
+										<option value="49">BOOKS</option>
+										<option value="50">OTHER</option>
+
 										<!-- loop_end -->
 										
 										</select>
