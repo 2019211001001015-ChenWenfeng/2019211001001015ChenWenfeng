@@ -84,6 +84,7 @@ public class Category {
     }
     public static String findByCaterotyId(Connection conn,int categoryId) throws SQLException {
         String sql = "select * from Category where categoryId = ?";
+
         PreparedStatement pt = conn.prepareStatement(sql);
         pt.setInt(1,categoryId);
         ResultSet rs = pt.executeQuery();
@@ -92,7 +93,9 @@ public class Category {
         {
             categoryName = rs.getString("categoryName");
 
+
         }
+
         return categoryName;
 
     }
