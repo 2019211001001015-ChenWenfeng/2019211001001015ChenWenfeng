@@ -60,7 +60,7 @@ public class UpdateUserServlet extends HttpServlet {
         try {
 
            iUserDao.updateUser(conn,user);
-           request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+           request.getRequestDispatcher("accountDetails").forward(request,response);
 
         } catch (SQLException e) {
             e.printStackTrace();

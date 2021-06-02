@@ -100,16 +100,16 @@ public class LoginServlet extends HttpServlet {
                    Cookie rememberCookie = new Cookie("cRememberMe",rememberMe);
 
 
-                   usernameCookie.setMaxAge(500);
-                   passwordCookie.setMaxAge(500);
-                   rememberCookie.setMaxAge(500);
+                   usernameCookie.setMaxAge(5000);
+                   passwordCookie.setMaxAge(5000);
+                   rememberCookie.setMaxAge(5000);
 
                    response.addCookie(usernameCookie);
                    response.addCookie(passwordCookie);
                    response.addCookie(rememberCookie);
                }
                HttpSession session = request.getSession();
-               session.setMaxInactiveInterval(100);
+               session.setMaxInactiveInterval(1000);
 
                session.setAttribute("user",user);
                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
