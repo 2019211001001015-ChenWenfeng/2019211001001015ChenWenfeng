@@ -6,9 +6,20 @@
          version="4.0">
 
 
+
+
   <display-name>Archetype Created Web Application</display-name>
     
-  
+<filter>
+  <filter-name>YourNameFilter</filter-name>
+  <filter-class>com.lab2.YourNameFilter</filter-class>
+</filter>
+  <filter-mapping>
+    <filter-name>YourNameFilter</filter-name>
+    <url-pattern>/welcome.jsp</url-pattern>
+  </filter-mapping>
+
+
   <servlet>
     <servlet-name>hello</servlet-name>
     <servlet-class>com.chenwenfeng.week2.MyServlet</servlet-class>
@@ -39,6 +50,7 @@
       <param-value>2019211001001015</param-value>
     </init-param>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>ConfigDemoServlet</servlet-name>
     <url-pattern>/config</url-pattern>
@@ -71,6 +83,7 @@
   <welcome-file-list>
     <welcome-file>home</welcome-file>
   </welcome-file-list>
+
 
 
 </web-app>
