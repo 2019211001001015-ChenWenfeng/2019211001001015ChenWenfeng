@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "LoginFilter",urlPatterns = {"/lab2/welcome.jsp","/lab2/validate.jsp"})
+@WebFilter(filterName = "LoginFilter",urlPatterns = {"/lab2/welcome.jsp"})
 public class LoginFilter implements Filter {
     public void destroy() {
         System.out.println("I am in LoginFilter--destroy()");
@@ -21,12 +21,15 @@ public class LoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
 
-        if(!request.getSession().isNew())
+        if(request.getSession().isNew())
         {
             request.getRequestDispatcher("/lab2/welcome.jsp").forward(request,response);
 
+
         }else {
+
             response.sendRedirect("login.jsp");
+
         }
 
         chain.doFilter(req, resp);

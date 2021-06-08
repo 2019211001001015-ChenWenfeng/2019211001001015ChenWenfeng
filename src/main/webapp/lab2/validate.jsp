@@ -22,12 +22,6 @@
    //todo 3: use if check username is admin and ppassword is admin
     if(login.getUsername().equals("admin") && login.getPassword().equals("admin"))
     {
-        Login login1 = new Login();
-        login1.setUsername("admin");
-        login1.setPassword("admin");
-
-        HttpSession session1 = request.getSession();
-        session1.setAttribute("user",login1);
 
 %>
     <jsp:forward page="welcome.jsp"/>
