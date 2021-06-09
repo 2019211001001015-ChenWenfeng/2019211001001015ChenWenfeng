@@ -66,7 +66,7 @@
    <!-- 配置Servlet的初始化参数：url -->
    <context-param>
      <param-name>url</param-name>
-     <param-value>jdbc:mysql://localhost:3306/userdb</param-value>
+     <param-value>jdbc:mysql://localhost:3306/userdb?useSSL=false</param-value>
    </context-param>
    <!-- 配置Servlet的初始化参数：user -->
    <context-param>
